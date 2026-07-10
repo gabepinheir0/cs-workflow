@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Playbook do CS · One Big Media</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#142544;
+    --sky:#79AAF7;
+    --lime:#CCE26F;
+    --purple:#8140FA;
+    --vibrancy:#3157F7;
+    --paper:#F6F8FC;
+    --card:#FFFFFF;
+    --ink:#142544;
+    --muted:#5B6785;
+    --line:#E3E8F2;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"DM Sans",system-ui,sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:960px;margin:0 auto;padding:0 24px}
+
+  /* Top nav */
+  nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(20,37,68,.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid rgba(255,255,255,.08);
+  }
+  nav .wrap{display:flex;align-items:center;gap:20px;height:58px;flex-wrap:wrap}
+  nav .brand{color:#fff;font-weight:700;font-size:15px;letter-spacing:.2px;display:flex;align-items:center;gap:9px}
+  nav .brand span{width:9px;height:9px;background:var(--lime);border-radius:2px;display:inline-block}
+  nav .links{display:flex;gap:18px;margin-left:auto;flex-wrap:wrap}
+  nav .links a{color:#B9C6E4;text-decoration:none;font-size:13.5px;font-weight:500;transition:color .15s}
+  nav .links a:hover{color:var(--lime)}
+
+  /* Hero */
+  header.hero{
+    background:linear-gradient(125deg,var(--navy) 0%,#1d2f57 42%,#3a2a72 100%);
+    color:#fff;position:relative;overflow:hidden;
+    padding:64px 0 56px;
+  }
+  header.hero::before{
+    content:"";position:absolute;inset:0;
+    background:
+      linear-gradient(115deg,transparent 60%,rgba(129,64,250,.35) 100%);
+    pointer-events:none;
+  }
+  header.hero .frame{
+    position:absolute;top:-40px;left:-60px;width:340px;height:420px;
+    border:1.5px solid rgba(121,170,247,.22);border-radius:26px;
+    transform:rotate(-16deg);pointer-events:none;
+  }
+  header.hero .frame.two{left:auto;right:-90px;top:60px;transform:rotate(12deg);border-color:rgba(204,226,111,.16)}
+  header.hero .wrap{position:relative}
+  .eyebrow{
+    display:inline-block;font-weight:700;font-size:12.5px;letter-spacing:2px;
+    text-transform:uppercase;color:var(--navy);background:var(--lime);
+    padding:5px 11px;border-radius:5px;margin-bottom:22px;
+  }
+  header.hero h1{
+    font-size:52px;line-height:1.02;font-weight:700;letter-spacing:-1.2px;
+    max-width:15ch;margin-bottom:18px;
+  }
+  header.hero h1 em{color:var(--sky);font-style:normal}
+  header.hero p.lede{font-size:18px;color:#C7D3EC;max-width:60ch;font-weight:400}
+  .stats{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap}
+  .stat{
+    background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);
+    border-radius:12px;padding:14px 20px;min-width:120px;
+  }
+  .stat b{display:block;font-size:26px;font-weight:700;color:var(--lime);line-height:1.1}
+  .stat span{font-size:13px;color:#AEBCDC}
+
+  /* Sections */
+  section{padding:52px 0}
+  .kicker{
+    font-weight:700;font-size:12px;letter-spacing:2px;text-transform:uppercase;
+    color:var(--purple);margin-bottom:8px;
+  }
+  h2{font-size:30px;font-weight:700;letter-spacing:-.6px;line-height:1.12;margin-bottom:6px}
+  h2 .mark{background:var(--lime);padding:0 8px;border-radius:4px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+  .section-intro{color:var(--muted);font-size:16.5px;max-width:70ch;margin:14px 0 34px}
+
+  /* Roteador diagram */
+  .machines{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:8px}
+  .machine{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:20px;position:relative;
+  }
+  .machine h4{font-size:16px;font-weight:700;margin-bottom:6px}
+  .machine p{font-size:14px;color:var(--muted)}
+  .machine .tag{
+    position:absolute;top:16px;right:16px;font-size:11px;font-weight:700;
+    letter-spacing:.5px;text-transform:uppercase;color:var(--vibrancy);
+  }
+
+  /* Lifecycle band */
+  .flow{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:16px}
+  .flow-phase{
+    border-radius:var(--radius);padding:20px 20px 18px;color:#fff;position:relative;overflow:hidden;
+  }
+  .flow-phase .n{font-size:12px;font-weight:700;letter-spacing:1.5px;opacity:.85;text-transform:uppercase}
+  .flow-phase h3{font-size:20px;font-weight:700;margin:4px 0 8px}
+  .flow-phase p{font-size:13.5px;line-height:1.5;opacity:.92}
+  .p-onb{background:linear-gradient(135deg,#4d84e0,var(--sky))}
+  .p-ong{background:linear-gradient(135deg,var(--purple),#9d6bff)}
+  .p-dis{background:linear-gradient(135deg,#20345f,var(--navy))}
+  .flow-orq{
+    background:var(--navy);color:#fff;border-radius:var(--radius);
+    padding:16px 22px;font-size:14px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  }
+  .flow-orq .lbl{color:var(--lime);font-weight:700;letter-spacing:.5px;text-transform:uppercase;font-size:12px}
+  .flow-orq .items{color:#C7D3EC}
+
+  /* Process cards */
+  .phase-head{display:flex;align-items:baseline;gap:14px;margin:44px 0 6px;flex-wrap:wrap}
+  .phase-head .badge{
+    font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+    padding:5px 11px;border-radius:6px;color:#fff;
+  }
+  .b-onb{background:var(--sky)}.b-ong{background:var(--purple)}.b-dis{background:var(--navy)}.b-orq{background:var(--vibrancy)}
+  .phase-meta{color:var(--muted);font-size:14.5px;margin-bottom:26px;max-width:74ch}
+
+  .proc{
+    --pc:var(--sky);
+    background:var(--card);border:1px solid var(--line);border-left:5px solid var(--pc);
+    border-radius:var(--radius);margin-bottom:18px;overflow:hidden;
+    transition:box-shadow .18s,transform .18s;
+  }
+  .proc:hover{box-shadow:0 8px 26px rgba(20,37,68,.09);transform:translateY(-2px)}
+  .proc.ong{--pc:var(--purple)}
+  .proc.dis{--pc:var(--navy)}
+  .proc-head{display:flex;align-items:center;gap:12px;padding:16px 22px 14px;flex-wrap:wrap}
+  .proc-head .id{
+    font-size:13px;font-weight:700;color:#fff;background:var(--pc);
+    padding:4px 10px;border-radius:7px;letter-spacing:.5px;flex-shrink:0;
+  }
+  .proc.dis .proc-head .id{background:var(--navy)}
+  .proc-head h3{font-size:18.5px;font-weight:700;letter-spacing:-.3px;flex:1;min-width:180px}
+  .who{
+    font-size:12px;font-weight:700;letter-spacing:.4px;color:var(--pc);
+    background:color-mix(in srgb,var(--pc) 12%,#fff);padding:5px 11px;border-radius:20px;
+    text-transform:uppercase;white-space:nowrap;
+  }
+  .proc.dis .who{color:var(--navy);background:#EDF0F7}
+  .proc-obj{
+    padding:0 22px 14px;color:var(--muted);font-size:15px;
+    border-bottom:1px solid var(--line);
+  }
+  .proc-obj b{color:var(--ink);font-weight:500}
+  .steps{list-style:none;padding:16px 22px 6px;counter-reset:s}
+  .steps li{
+    display:flex;gap:13px;padding:0 0 14px;font-size:15px;line-height:1.55;color:var(--ink);
+  }
+  .steps li .n{
+    counter-increment:s;flex-shrink:0;width:24px;height:24px;border-radius:50%;
+    background:var(--pc);color:#fff;font-size:12.5px;font-weight:700;
+    display:flex;align-items:center;justify-content:center;margin-top:1px;
+  }
+  .proc.dis .steps li .n{background:var(--navy)}
+  .steps li .n::before{content:counter(s)}
+  .steps li b{font-weight:700}
+  .proc-foot{
+    display:flex;gap:10px;flex-wrap:wrap;padding:2px 22px 16px;
+  }
+  .io{
+    font-size:13px;color:var(--muted);background:var(--paper);border:1px solid var(--line);
+    border-radius:8px;padding:7px 12px;flex:1;min-width:220px;
+  }
+  .io b{color:var(--vibrancy);font-weight:700;text-transform:uppercase;font-size:11px;letter-spacing:.8px;margin-right:6px}
+  .callout{
+    display:flex;gap:10px;align-items:flex-start;margin:0 22px 18px;padding:11px 14px;
+    border-radius:10px;font-size:13.5px;line-height:1.5;
+  }
+  .callout svg{flex-shrink:0;margin-top:2px}
+  .callout.warn{background:#FBFCE9;color:#6B5D0E}
+  .callout.warn b{color:#4A3F08}
+  .callout.info{background:#EEF3FD;color:#33507E}
+  .callout.info b{color:#1D3A66}
+  .callout.tier{background:#F4EEFE;color:#5B3A9E}
+  .callout.tier b{color:#3E2472}
+
+  /* Tables */
+  .tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);margin-bottom:24px;background:var(--card)}
+  table{width:100%;border-collapse:collapse;font-size:14.5px}
+  thead th{background:var(--navy);color:#fff;text-align:left;padding:12px 16px;font-weight:700;font-size:13px;letter-spacing:.3px}
+  tbody td{padding:11px 16px;border-top:1px solid var(--line);color:var(--ink)}
+  tbody tr:nth-child(even) td{background:#FAFBFE}
+  .tier{font-weight:700}
+  .pri-alta{color:#C0392B;font-weight:700}
+  .pri-media{color:#B8860B;font-weight:700}
+  .pri-baixa{color:var(--vibrancy);font-weight:700}
+
+  /* Templates section */
+  .tpl-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:14px}
+  details{padding:0}
+  details summary{
+    list-style:none;cursor:pointer;padding:16px 20px;display:flex;align-items:center;gap:12px;
+    font-weight:700;font-size:16px;
+  }
+  details summary::-webkit-details-marker{display:none}
+  details summary .chev{margin-left:auto;color:var(--muted);transition:transform .2s;font-size:13px}
+  details[open] summary .chev{transform:rotate(90deg)}
+  details summary .pill{background:var(--sky);color:#fff;font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;letter-spacing:.5px;text-transform:uppercase}
+  .tpl-body{padding:0 20px 20px;border-top:1px solid var(--line)}
+  .tpl-body pre{
+    white-space:pre-wrap;font-family:"DM Sans",sans-serif;font-size:14px;color:var(--ink);
+    background:var(--paper);padding:16px 18px;border-radius:10px;margin-top:14px;line-height:1.65;
+  }
+  .tpl-body .var{background:var(--lime);border-radius:3px;padding:0 3px;font-weight:700}
+  .ext{margin-top:12px;font-size:13.5px;color:var(--muted)}
+  .ext a{color:var(--vibrancy);font-weight:700;text-decoration:none}
+
+  footer{background:var(--navy);color:#8FA0C4;padding:34px 0;font-size:13.5px;text-align:center}
+  footer b{color:#fff}
+
+  @media (max-width:640px){
+    header.hero h1{font-size:38px}
+    .grid4{grid-template-columns:1fr}
+    .flow{grid-template-columns:1fr}
+    nav .links{display:none}
+  }
+
+  /* Print / PDF export */
+  @media print{
+    nav{display:none}
+    header.hero{padding:34px 0;background:var(--navy)!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    body{background:#fff}
+    section{padding:22px 0}
+    .proc,.tbl-wrap,.machine,.flow-phase,.tpl-full{break-inside:avoid}
+    .phase-head{break-after:avoid}
+    details[open] .tpl-body{display:block}
+    a{color:var(--navy)!important;text-decoration:none}
+    *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand"><span></span>One Big Media · Playbook do CS</div>
+    <div class="links">
+      <a href="#visao">Visão geral</a>
+      <a href="#onboarding">Onboarding</a>
+      <a href="#ongoing">Ongoing</a>
+      <a href="#distrato">Distrato</a>
+      <a href="#referencia">Referência</a>
+      <a href="#templates">Templates</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="frame"></div>
+  <div class="frame two"></div>
+  <div class="wrap">
+    <div class="eyebrow">Customer Success · YouTube Specialist</div>
+    <h1>O que fazemos como <em>CS</em>, do início ao fim</h1>
+    <p class="lede">Manual operacional do especialista de canal na One Big Media. Cada processo descrito por quatro pontos: o que entra, quem é responsável, qual a ação e o que sai.</p>
+    <div class="stats">
+      <div class="stat"><b>3</b><span>fases do ciclo</span></div>
+      <div class="stat"><b>20+</b><span>processos mapeados</span></div>
+      <div class="stat"><b>3</b><span>máquinas orquestradas</span></div>
+      <div class="stat"><b>4</b><span>tiers de cliente</span></div>
+    </div>
+  </div>
+</header>
+
+<section id="visao" class="wrap">
+  <div class="kicker">Visão geral</div>
+  <h2>O CS é o <span class="mark">roteador</span> do cliente</h2>
+  <p class="section-intro">O trabalho não é uma lista de tarefas soltas. É um ciclo de vida em três fases, atravessado por uma camada constante de coordenação entre times que não conversam automaticamente entre si. O CS é o ponto único onde a informação do cliente entra e se distribui.</p>
+
+  <div class="machines">
+    <div class="machine"><div class="tag">Jira</div><h4>Operação de plataformas</h4><p>Content ID, associação e desassociação, disputas, strikes, distribuição musical, backup. Acionada por demanda, com prioridade e SLA próprios.</p></div>
+    <div class="machine"><div class="tag">Esteira</div><h4>Pesquisa e Desenvolvimento</h4><p>Relatórios mensais e overviews. Produz de 24 a 25 relatórios por dia nos primeiros dias do mês. O CS prioriza a fila de canais.</p></div>
+    <div class="machine"><div class="tag">Conteúdo</div><h4>Produção</h4><p>VODs, Shorts e edição de conteúdo, conforme o perfil e o contrato do cliente.</p></div>
+    <div class="machine"><div class="tag">Entradas e saídas</div><h4>Comercial, Financeiro, Fiscal e Jurídico</h4><p>Acionados nos momentos de entrada e distrato do cliente, mais a liderança de CS.</p></div>
+  </div>
+
+  <div style="margin-top:36px">
+    <div class="flow">
+      <div class="flow-phase p-onb"><div class="n">Fase 1</div><h3>Onboarding</h3><p>~3 meses, 10 encontros. Uma vez por cliente. Denso e sequencial.</p></div>
+      <div class="flow-phase p-ong"><div class="n">Fase 2</div><h3>Ongoing</h3><p>Recorrente e relacional. Intensidade varia por tier do cliente.</p></div>
+      <div class="flow-phase p-dis"><div class="n">Fase 3</div><h3>Distrato</h3><p>Disparado por evento. Retenção, jurídico, backup e encerramento.</p></div>
+    </div>
+    <div class="flow-orq"><span class="lbl">Camada transversal</span><span class="items">Orquestração constante entre Operação, P&amp;D, Produção, Financeiro, Fiscal, Jurídico, Comercial e o cliente</span></div>
+  </div>
+</section>
+
+<!-- ONBOARDING -->
+<section id="onboarding" class="wrap" style="padding-top:20px">
+  <div class="phase-head"><span class="badge b-onb">Fase 1</span><h2>Onboarding e consultoria</h2></div>
+  <p class="phase-meta">Duração média de 3 meses, cerca de 10 encontros. Sequência: handover, kickoff, diagnóstico, setup, seis treinamentos, cluster e estratégia criativa. Referência interna de custo: 51h10 de trabalho, cerca de R$ 6.244 no total.</p>
+
+  <div class="proc">
+    <div class="proc-head"><span class="id">1.1</span><h3>Handover comercial e recepção</h3><span class="who">CS</span></div>
+    <div class="proc-obj">Receber o cliente do Comercial e preparar toda a base interna antes do primeiro contato.</div>
+    <ul class="steps">
+      <li><span class="n"></span><div>Ao receber o <b>BIP e o contrato</b> da liderança e entrar no grupo do cliente, ler os dois e entender contexto, valores e escopo.</div></li>
+      <li><span class="n"></span><div>Enviar a <b>mensagem padrão de boas-vindas</b> no grupo, já solicitando os três acessos ADM. <a href="#tpl-boasvindas" style="color:var(--vibrancy);font-weight:700;text-decoration:none">Ver modelo</a></div></li>
+      <li><span class="n"></span><div>Avisar da entrada o <b>Financeiro/administrativo</b> e o <b>time de dados</b> (P&amp;D).</div></li>
+      <li><span class="n"></span><div>Inserir o cliente no <b>Dossiê</b>.</div></li>
+      <li><span class="n"></span><div>Criar a <b>pasta do cliente no Drive</b> e subir contrato, BIP, reports e overviews.</div></li>
+    </ul>
+    <div class="proc-foot">
+      <div class="io"><b>Entra</b>BIP e contrato, grupo criado.</div>
+      <div class="io"><b>Sai</b>Cliente recebido, pasta e Dossiê prontos.</div>
+    </div>
+  </div>
+
+  <div class="proc">
+    <div class="proc-head"><span class="id">1.2</span><h3>Email de entrada do cliente</h3><span class="who">CS</span></div>
+    <div class="proc-obj">Notificar todas as áreas da empresa sobre o novo cliente de uma vez só.</div>
+    <ul class="steps">
+      <li><span class="n"></span><div>Reunir os dados do BIP e contrato: canal, CMS, rótulo, valores (mínimo, share, fee), CNPJ, email de NF, dados bancários e competência inicial.</div></li>
+      <li><span class="n"></span><div>Confirmar que o <b>rótulo já foi criado</b>. Sem rótulo, o email não pode sair.</div></li>
+      <li><span class="n"></span><div>Preencher o <b>template do email de entrada</b>. <a href="#tpl-entrada" style="color:var(--vibrancy);font-weight:700;text-decoration:none">Ver modelo</a></div></li>
+      <li><span class="n"></span><div>Preencher a <b>planilha de entrada de cliente</b> para controle financeiro.</div></li>
+      <li><span class="n"></span><div>Anexar contrato e BIP e enviar para Financeiro, Fiscal, Comercial, CS, Operação e Dados.</div></li>
+    </ul>
+    <div class="callout warn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#B8860B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg><div><b>Trava:</b> o email não pode ser enviado sem o rótulo definido.</div></div>
+    <div class="proc-foot">
+      <div class="io"><b>Entra</b>Dados do BIP e contrato.</div>
+      <div class="io"><b>Sai</b>Áreas notificadas, planilha preenchida.</div>
+    </div>
+  </div>
+
+  <div class="proc">
+    <div class="proc-head"><span class="id">1.3</span><h3>Demandas de setup na Operação</h3><span class="who">CS abre · Ops executa</span></div>
+    <div class="proc-obj">Acionar a Operação para associar, rotular e proteger o canal no CMS.</div>
+    <ul class="steps">
+      <li><span class="n"></span><div>No board <b>OPS do Jira</b>, criar "Criar rótulo [canal]". Sempre antes do email de entrada.</div></li>
+      <li><span class="n"></span><div>Criar "Aceitar acesso de editor [canal]".</div></li>
+      <li><span class="n"></span><div>Criar "Backup e Associação [canal]" e <b>anexar o doc de pedido de associação</b>.</div></li>
+      <li><span class="n"></span><div>Criar "Incluir no dash de reivindicações [canal]".</div></li>
+      <li><span class="n"></span><div>No chat CS mais Produção, pedir a inclusão na planilha de demandas e o <b>relatório de overview com cluster</b>. <a href="#tpl-jira" style="color:var(--vibrancy);font-weight:700;text-decoration:none">Ver modelo</a></div></li>
+    </ul>
+    <div class="callout info"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#33507E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg><div><b>Prazos:</b> associações no CMS só de segunda a quarta. Roll up de música e vídeo depende do YouTube, sem prazo estimável.</div></div>
+    <div class="proc-foot">
+      <div class="io"><b>Entra</b>Cliente recebido, rótulo, doc de associação.</div>
+      <div class="io"><b>Sai</b>Operação e Produção acionadas.</div>
+    </div>
+  </div>
+
+  <div class="proc">
+    <div class="proc-head"><span class="id">1.4</span><h3>Aceite e associação do canal</h3><span class="who">Operação</span></div>
+    <div class="proc-obj">Colocar o canal dentro do CMS conforme o contrato.</div>
+    <ul class="steps">
+      <li><span class="n"></span><div>Aceitar o <b>convite de editor/ADM</b> enviado pelo cliente.</div></li>
+      <li><span class="n"></span><div>Associar o canal ao CMS conforme o contrato.</div></li>
+      <li><span class="n"></span><div>Aguardar a liberação da roll up pelo YouTube (música e vídeo).</div></li>
+    </ul>
+    <div class="proc-foot">
+      <div class="io"><b>Entra</b>Convite de editor, demandas de Jira.</div>
+      <div class="io"><b>Sai</b>Canal associado e protegido.</div>
+    </div>
+  </div>
+
+  <div class="proc">
+    <div class="proc-head"><span class="id">1.5</span><h3>Reunião de kickoff</h3><span class="who">CS mais Comercial</span></div>
+    <div class="proc-obj">Alinhar contexto, metas e o calendário de mentorias com o cliente.</div>
+    <ul class="steps">
+      <li><span class="n"></span><div>Agendar de <b>2 a 7 dias após o BIP</b>, com uma pessoa do Comercial presente.</div></li>
+      <li><span class="n"></span><div>Preparar (~40 min): revisar BIP, histórico do canal e pontos de meta.</div></li>
+      <li><span class="n"></span><div>Conduzir (~1h): apresentação e conexão, briefing, metas, Adsense, fluxo financeiro e próximos passos.</div></li>
+      <li><span class="n"></span><div>Ainda na reunião, propor datas e <b>agendar o diagnóstico para a segunda semana</b> (tempo de preparar o material).</div></li>
+      <li><span class="n"></span><div>Fixar as reuniões seguintes no mesmo dia e horário.</div></li>
+    </ul>
+    <div class="proc-foot">
+      <div class="io"><b>Entra</b>BIP e contrato estudados.</div>
+      <div class="io"><b>Sai</b>Contexto, metas e calendário definidos.</div>
+    </div>
+  </div>
+
+  <div class="proc">
+    <div class="proc-head"><span class="id">1.6</span><h3>Diagnóstico do canal</h3><span class="who">CS</span></div>
+    <div class="proc-obj">Fazer o raio-x completo do canal para achar pontos fortes e oportunidades.</div>
+    <ul class="steps">
+      <li><span class="n"></span><div>Análise (~4h): puxar métricas gerais, perfil de audiência, crescimento, receita, frequência de publicação e setup do canal.</div></li>
+      <li><span class="n"></span><div>Montar o documento avaliando pontos fortes e oportunidades, com foco em <b>consistência, monetização e organização de playlists</b>.</div></li>
+      <li><span class="n"></span><div>Estruturar por blocos: métricas gerais, boas práticas, ID visual, monetização e conteúdo.</div></li>
+      <li><span class="n"></span><div>Reunião (~1h30): apresentar o diagnóstico ao cliente.</div></li>
+    </ul>
+    <div class="proc-foot">
+      <div class="io"><b>Entra</b>Acesso ao canal e métricas.</div>
+      <div class="io"><b>Sai</b>Documento de diagnóstico apresentado.</div>
+    </div>
+  </div>
+
+  <div class="proc">
+    <div class="proc-head"><span class="id">1.7</span><h3>Setup do canal</h3><span class="who">CS mais Operação</span></div>
+    <div class="proc-obj">Configurar o canal e definir a rotina inicial de trabalho. Até 1 semana após o diagnóstico (~4h).</div>
+    <ul class="steps">
+      <li><span class="n"></span><div>Definir o <b>to-do diário</b> com o cliente.</div></li>
+      <li><span class="n"></span><div>Decidir o nível de mão na massa conforme o perfil (overdelivery, mesmo sem coprodução).</div></li>
+      <li><span class="n"></span><div>Operação: criar rótulos, aplicar CID, definir se haverá curadoria ativa e solicitar o relatório de CID.</div></li>
+    </ul>
+    <div class="proc-foot">
+      <div class="io"><b>Entra</b>Diagnóstico concluído.</div>
+      <div class="io"><b>Sai</b>Canal configurado, rotina definida.</div>
+    </div>
+  </div>
+
+  <div class="proc">
+    <div class="proc-head"><span class="id">1.8</span><h3>Treinamentos (6 mentorias)</h3><span class="who">CS</span></div>
+    <div class="proc-obj">Capacitar o cliente nos seis pilares. Cada treinamento tem preparação mais reunião.</div>
+    <ul class="steps">
+      <li><span class="n"></span><div><b>Monetização</b> (prep ~2h): treinamento mais ativação das possibilidades de monetização.</div></li>
+      <li><span class="n"></span><div><b>CID e proteção</b> (prep ~15 min, reunião ~40 min).</div></li>
+      <li><span class="n"></span><div><b>Metadados SEO</b> (prep ~1h30): títulos, descrições, tags e thumbnails.</div></li>
+      <li><span class="n"></span><div><b>Formatos</b>: VODs, Lives, Shorts, Podcasts, Vlogs e ferramentas de interação.</div></li>
+      <li><span class="n"></span><div><b>Conteúdo</b> (prep 2h a 4h): geral ou aplicado, conforme o ticket.</div></li>
+      <li><span class="n"></span><div><b>Análise YT</b> (prep ~2h): como ler os relatórios da casa.</div></li>
+    </ul>
+    <div class="proc-foot">
+      <div class="io"><b>Entra</b>Setup pronto, materiais preparados.</div>
+      <div class="io"><b>Sai</b>Cliente treinado nos seis pilares.</div>
+    </div>
+  </div>
+
+  <div class="proc">
+    <div class="proc-head"><span class="id">1.9</span><h3>Cluster e estratégia criativa</h3><span class="who">CS</span></div>
+    <div class="proc-obj">Organizar o conteúdo por temas e propor a estratégia de crescimento. Fecha o onboarding.</div>
+    <ul class="steps">
+      <li><span class="n"></span><div>Análise (~4h): agrupar conteúdos por tema (clusters) e avaliar o desempenho por categoria.</div></li>
+      <li><span class="n"></span><div>Propor cronograma e formatos ideais (VODs, Lives, Shorts) para maximizar engajamento, alcance e monetização.</div></li>
+      <li><span class="n"></span><div>Reunião (~1h30): apresentar a estratégia criativa ao cliente.</div></li>
+    </ul>
+    <div class="proc-foot">
+      <div class="io"><b>Entra</b>Desempenho por categoria, histórico.</div>
+      <div class="io"><b>Sai</b>Estratégia por cluster definida.</div>
+    </div>
+  </div>
+
+  <div class="proc">
+    <div class="proc-head"><span class="id">1.10</span><h3>Pesquisa de satisfação pós-onboarding</h3><span class="who">CS</span></div>
+    <div class="proc-obj">Fechar o onboarding medindo a percepção do cliente e migrar para o ongoing.</div>
+    <ul class="steps">
+      <li><span class="n"></span><div>Enviar o <b>formulário de satisfação</b> pós-onboarding.</div></li>
+      <li><span class="n"></span><div>Registrar o feedback recebido.</div></li>
+      <li><span class="n"></span><div>Migrar o cliente para o regime de ongoing.</div></li>
+    </ul>
+    <div class="proc-foot">
+      <div class="io"><b>Entra</b>Onboarding concluído.</div>
+      <div class="io"><b>Sai</b>Feedback registrado, cliente em ongoing.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ONGOING -->
+<section id="ongoing" class="wrap" style="padding-top:20px">
+  <div class="phase-head"><span class="badge b-ong">Fase 2</span><h2>Ongoing</h2></div>
+  <p class="phase-meta">Recorrente e relacional. Referência de custo: R$ 171,73 por cliente ao mês. A intensidade de cada rotina varia pela classificação do cliente. Entregas gerais: treinamentos mensais, fórum de nichos trimestral, networking sob demanda, mais gestão financeira, suporte e reports.</p>
+
+  <div class="proc ong">
+    <div class="proc-head"><span class="id">2.1</span><h3>Check do canal</h3><span class="who">CS</span></div>
+    <div class="proc-obj">Acompanhar a saúde do canal semana a semana e agir sobre os desvios. Cadência varia por tier.</div>
+    <ul class="steps">
+      <li><span class="n"></span><div>Inserir <b>cliente, link do canal e grade semanal</b> no modelo.</div></li>
+      <li><span class="n"></span><div>Inserir os dados da semana vigente e, na coluna total, o <b>acumulado desde a semana 1</b>.</div></li>
+      <li><span class="n"></span><div>Preencher a tabela <b>Média do canal</b> para acompanhar o desempenho.</div></li>
+      <li><span class="n"></span><div>Comparar cada métrica contra a média do mês anterior. Se estiver fora, <b>propor solução no campo de recomendações</b>.</div></li>
+      <li><span class="n"></span><div>Registrar anomalias (strike, vídeo viral) com data no histórico, e pontos de atenção (ex: cliente fora da grade).</div></li>
+      <li><span class="n"></span><div>Durante o check, ativar CID, contestações e disputas. Contagem de segunda a domingo.</div></li>
+    </ul>
+    <div class="callout tier"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5B3A9E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><div><b>Periodicidade:</b> Diamante diário, Ouro semanal, Prata quinzenal, Bronze mensal ou bimensal.</div></div>
+    <div class="proc-foot">
+      <div class="io"><b>Entra</b>Dados do Studio, baseline do mês, grade.</div>
+      <div class="io"><b>Sai</b>Check com recomendações e alertas.</div>
+    </div>
+  </div>
+
+  <div class="proc ong">
+    <div class="proc-head"><span class="id">2.2</span><h3>Ativação de CID, contestações e disputas</h3><span class="who">CS aciona · Ops executa</span></div>
+    <div class="proc-obj">Tratar as reivindicações identificadas no check para proteger o conteúdo e a receita.</div>
+    <ul class="steps">
+      <li><span class="n"></span><div>Identificar as reivindicações durante o check do canal.</div></li>
+      <li><span class="n"></span><div>Ativar <b>Content ID</b> onde couber.</div></li>
+      <li><span class="n"></span><div>Se a reivindicação parece incorreta, <b>abrir disputa</b>.</div></li>
+      <li><span class="n"></span><div>Se a disputa for recusada, enviar <b>contestação</b>.</div></li>
+      <li><span class="n"></span><div>Coordenar com a Operação via Jira.</div></li>
+    </ul>
+    <div class="proc-foot">
+      <div class="io"><b>Entra</b>Reivindicações e casos incorretos.</div>
+      <div class="io"><b>Sai</b>Conteúdo protegido, receita preservada.</div>
+    </div>
+  </div>
+
+  <div class="proc ong">
+    <div class="proc-head"><span class="id">2.3</span><h3>Sugestões de pauta</h3><span class="who">CS</span></div>
+    <div class="proc-obj">Alimentar o cliente com ideias de conteúdo baseadas no nicho e no mercado.</div>
+    <ul class="steps">
+      <li><span class="n"></span><div>Acompanhar tendências do nicho e o <b>desempenho de outros clientes do mesmo nicho</b>.</div></li>
+      <li><span class="n"></span><div>Preparar sugestões ativas de temas e pautas.</div></li>
+      <li><span class="n"></span><div>Enviar ao cliente na cadência do tier.</div></li>
+    </ul>
+    <div class="callout tier"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5B3A9E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><div><b>Periodicidade:</b> Diamante e Ouro semanal, Prata quinzenal ou mensal, Bronze em bloco por nicho.</div></div>
+    <div class="proc-foot">
+      <div class="io"><b>Entra</b>Tendências e leitura de mercado.</div>
+      <div class="io"><b>Sai</b>Pautas entregues ao cliente.</div>
+    </div>
+  </div>
+
+  <div class="proc ong">
+    <div class="proc-head"><span class="id">2.4</span><h3>Priorização da fila de relatórios</h3><span class="who">CS define · P&amp;D produz</span></div>
+    <div class="proc-obj">Ordenar quais canais recebem os overviews primeiro, dentro da esteira mensal do P&amp;D.</div>
+    <ul class="steps">
+      <li><span class="n"></span><div>Na virada do mês, abrir a planilha da esteira de relatórios.</div></li>
+      <li><span class="n"></span><div>Ordenar os canais <b>pela classificação</b>: Diamante, depois Ouro, Prata e Bronze.</div></li>
+      <li><span class="n"></span><div>Sinalizar canais com <b>reunião já agendada</b> para subir na fila.</div></li>
+      <li><span class="n"></span><div>Confirmar a fila para o P&amp;D produzir (24 a 25 relatórios por dia nos primeiros dias do mês).</div></li>
+    </ul>
+    <div class="proc-foot">
+      <div class="io"><b>Entra</b>Carteira e classificação dos clientes.</div>
+      <div class="io"><b>Sai</b>Fila ordenada para o P&amp;D.</div>
+    </div>
+  </div>
+
+  <div class="proc ong">
+    <div class="proc-head"><span class="id">2.5</span><h3>Report mensal e reunião de overview</h3><span class="who">P&amp;D produz · CS apresenta</span></div>
+    <div class="proc-obj">Transformar o relatório do P&amp;D em conversa estratégica com o cliente, ligada à meta.</div>
+    <ul class="steps">
+      <li><span class="n"></span><div>Receber o overview produzido pelo P&amp;D.</div></li>
+      <li><span class="n"></span><div>Ler e preparar a leitura estratégica ligada à meta do cliente.</div></li>
+      <li><span class="n"></span><div>Conduzir a <b>reunião de overview</b>.</div></li>
+      <li><span class="n"></span><div>Atualizar o Account Plan.</div></li>
+    </ul>
+    <div class="callout tier"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5B3A9E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><div><b>Periodicidade:</b> report mensal para todos. Account Plan: Diamante e Ouro trimestral, Prata semestral, Bronze anual.</div></div>
+    <div class="proc-foot">
+      <div class="io"><b>Entra</b>Overview do P&amp;D.</div>
+      <div class="io"><b>Sai</b>Metas revisadas, Account Plan atualizado.</div>
+    </div>
+  </div>
+
+  <div class="proc ong">
+    <div class="proc-head"><span class="id">2.6</span><h3>Atendimento reativo e proativo</h3><span class="who">CS</span></div>
+    <div class="proc-obj">Ser o ponto de contato do cliente e rotear cada demanda para a máquina certa.</div>
+    <ul class="steps">
+      <li><span class="n"></span><div>Receber a demanda por WhatsApp, email ou ligação.</div></li>
+      <li><span class="n"></span><div>Resolver o que é do CS ou <b>rotear para a máquina certa</b> (Operação, P&amp;D, Produção).</div></li>
+      <li><span class="n"></span><div>Acompanhar até o fechamento.</div></li>
+      <li><span class="n"></span><div>Planejar internamente o apoio proativo ao parceiro.</div></li>
+    </ul>
+    <div class="proc-foot">
+      <div class="io"><b>Entra</b>Dúvidas, demandas e oportunidades.</div>
+      <div class="io"><b>Sai</b>Cliente atendido, demandas roteadas.</div>
+    </div>
+  </div>
+
+  <div class="proc ong">
+    <div class="proc-head"><span class="id">2.7</span><h3>Repasse de documentos e atualizações</h3><span class="who">CS</span></div>
+    <div class="proc-obj">Servir de ponte entre a Operação/plataformas e o cliente para documentos que precisam ser encaminhados.</div>
+    <ul class="steps">
+      <li><span class="n"></span><div>Receber da Operação ou das plataformas o documento a repassar (política, aviso, atualização).</div></li>
+      <li><span class="n"></span><div>Encaminhar ao cliente com o contexto necessário.</div></li>
+      <li><span class="n"></span><div>Confirmar o recebimento.</div></li>
+    </ul>
+    <div class="proc-foot">
+      <div class="io"><b>Entra</b>Documento vindo da Operação.</div>
+      <div class="io"><b>Sai</b>Cliente informado.</div>
+    </div>
+  </div>
+
+  <div class="proc ong">
+    <div class="proc-head"><span class="id">2.8</span><h3>Distribuição e lançamentos musicais</h3><span class="who">CS coordena · Ops executa</span></div>
+    <div class="proc-obj">Levar o lançamento do cliente até as DSPs, dentro dos prazos e com os metadados corretos.</div>
+    <ul class="steps">
+      <li><span class="n"></span><div>Cliente informa a intenção de lançamento.</div></li>
+      <li><span class="n"></span><div>Garantir os <b>metadados completos</b> via formulário: capa 1400x1400, áudio .wav, título, ISRC, artista, versão, data, gênero, compositor, idioma.</div></li>
+      <li><span class="n"></span><div>Checar os prazos antes de confirmar a data.</div></li>
+      <li><span class="n"></span><div>Apoiar o <b>pitching</b> nas DSPs (Amazon, YouTube, Apple, Spotify, Deezer, Claro Music).</div></li>
+      <li><span class="n"></span><div>Acompanhar o lançamento e emitir o smartlink. Intervalo sugerido de 30 a 45 dias entre lançamentos.</div></li>
+    </ul>
+    <div class="callout warn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#B8860B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg><div><b>Prazos duros:</b> metadados mínimo 30 dias, internacional 40 dias, podcast primeira entrega 21 dias, troca de Adsense só a cada 32 dias.</div></div>
+    <div class="proc-foot">
+      <div class="io"><b>Entra</b>Intenção de lançamento, metadados.</div>
+      <div class="io"><b>Sai</b>Conteúdo nas DSPs, pitch e smartlink.</div>
+    </div>
+  </div>
+
+  <div class="proc ong">
+    <div class="proc-head"><span class="id">2.9</span><h3>NPS trimestral</h3><span class="who">CS</span></div>
+    <div class="proc-obj">Medir a satisfação do cliente ao longo do relacionamento.</div>
+    <ul class="steps">
+      <li><span class="n"></span><div>Na cadência trimestral, enviar o NPS ao cliente.</div></li>
+      <li><span class="n"></span><div>Registrar a medição.</div></li>
+    </ul>
+    <div class="callout info"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#33507E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg><div><b>Status:</b> hoje ainda não executado de forma consistente. Candidato natural para o projeto AI-first.</div></div>
+    <div class="proc-foot">
+      <div class="io"><b>Entra</b>Cadência trimestral.</div>
+      <div class="io"><b>Sai</b>Satisfação medida e registrada.</div>
+    </div>
+  </div>
+</section>
+
+<!-- DISTRATO -->
+<section id="distrato" class="wrap" style="padding-top:20px">
+  <div class="phase-head"><span class="badge b-dis">Fase 3</span><h2>Distrato</h2></div>
+  <p class="phase-meta">Disparada por evento (solicitação do cliente). Sequencial e pesada em coordenação com Jurídico, Financeiro e Operação, com uma tentativa de retenção logo no início.</p>
+
+  <div class="proc dis">
+    <div class="proc-head"><span class="id">3.1</span><h3>Notificação e tentativa de retenção</h3><span class="who">CS</span></div>
+    <div class="proc-obj">Primeira reação a um pedido de saída: tentar reter antes de seguir com o distrato.</div>
+    <ul class="steps">
+      <li><span class="n"></span><div>Ao receber a solicitação de distrato, <b>notificar os líderes</b>.</div></li>
+      <li><span class="n"></span><div>Avaliar o caso.</div></li>
+      <li><span class="n"></span><div>Tentar reverter a situação para manter o parceiro.</div></li>
+      <li><span class="n"></span><div>Se não for eficaz ou não fizer sentido, seguir com o distrato.</div></li>
+    </ul>
+    <div class="proc-foot">
+      <div class="io"><b>Entra</b>Solicitação de distrato do cliente.</div>
+      <div class="io"><b>Sai</b>Decisão de reter ou sair.</div>
+    </div>
+  </div>
+
+  <div class="proc dis">
+    <div class="proc-head"><span class="id">3.2</span><h3>Notificação interna e coleta</h3><span class="who">CS</span></div>
+    <div class="proc-obj">Avisar as áreas envolvidas e reunir tudo que o distrato vai exigir.</div>
+    <ul class="steps">
+      <li><span class="n"></span><div>Notificar Operação e Financeiro por email, com as principais informações e prazos.</div></li>
+      <li><span class="n"></span><div>Coletar as informações necessárias para solicitar o distrato.</div></li>
+    </ul>
+    <div class="proc-foot">
+      <div class="io"><b>Entra</b>Decisão de seguir com o distrato.</div>
+      <div class="io"><b>Sai</b>Áreas cientes, dados reunidos.</div>
+    </div>
+  </div>
+
+  <div class="proc dis">
+    <div class="proc-head"><span class="id">3.3</span><h3>Documento de distrato e cláusulas</h3><span class="who">CS · Jurídico · Financeiro</span></div>
+    <div class="proc-obj">Formalizar a saída revisando as cláusulas com atenção a multa e pendências.</div>
+    <ul class="steps">
+      <li><span class="n"></span><div>Solicitar o documento de distrato ao <b>Jurídico</b>.</div></li>
+      <li><span class="n"></span><div>Revisar as cláusulas de multa, aviso prévio e pendências financeiras.</div></li>
+      <li><span class="n"></span><div>Havendo multa, pedir apoio do Financeiro e <b>sinalizar no email de saída</b> para a cobrança seguir.</div></li>
+    </ul>
+    <div class="proc-foot">
+      <div class="io"><b>Entra</b>Informações coletadas.</div>
+      <div class="io"><b>Sai</b>Documento em preparação, cobrança acionada.</div>
+    </div>
+  </div>
+
+  <div class="proc dis">
+    <div class="proc-head"><span class="id">3.4</span><h3>Aviso prévio e assinatura</h3><span class="who">CS</span></div>
+    <div class="proc-obj">Manter o serviço em ordem até o fim do aviso prévio e assinar o distrato.</div>
+    <ul class="steps">
+      <li><span class="n"></span><div>Durante o aviso prévio, continuar <b>cumprindo todas as obrigações</b> e manter tudo redondo.</div></li>
+      <li><span class="n"></span><div>Ao fim do aviso prévio, seguir com a assinatura do distrato.</div></li>
+    </ul>
+    <div class="proc-foot">
+      <div class="io"><b>Entra</b>Distrato em curso.</div>
+      <div class="io"><b>Sai</b>Distrato assinado.</div>
+    </div>
+  </div>
+
+  <div class="proc dis">
+    <div class="proc-head"><span class="id">3.5</span><h3>Backup, desassociação e encerramento</h3><span class="who">CS aciona · Ops executa</span></div>
+    <div class="proc-obj">Encerrar tecnicamente a relação e formalizar a saída em todos os registros.</div>
+    <ul class="steps">
+      <li><span class="n"></span><div>Com o distrato assinado, abrir demandas de <b>backup e desassociação</b> do canal.</div></li>
+      <li><span class="n"></span><div>Enviar o backup ao cliente.</div></li>
+      <li><span class="n"></span><div>Atualizar Pipedrive, pasta do cliente e planilha de churn.</div></li>
+      <li><span class="n"></span><div>Enviar o <b>email de saída</b> para Operação, Financeiro e Comercial com o distrato assinado.</div></li>
+    </ul>
+    <div class="proc-foot">
+      <div class="io"><b>Entra</b>Distrato assinado.</div>
+      <div class="io"><b>Sai</b>Canal desassociado, saída formalizada.</div>
+    </div>
+  </div>
+</section>
+
+<!-- REFERENCIA -->
+<section id="referencia" class="wrap" style="padding-top:20px">
+  <div class="phase-head"><span class="badge b-orq">Referência</span><h2>Tabelas de <span class="mark">referência</span></h2></div>
+
+  <h3 style="font-size:17px;margin:8px 0 12px">Classificação do cliente</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Tier</th><th>Audiência mês</th><th>Ticket 1BMG</th><th>Influência</th></tr></thead>
+      <tbody>
+        <tr><td class="tier">0. Diamante</td><td>&gt; 1M</td><td>&gt; R$ 4.000</td><td>Alta</td></tr>
+        <tr><td class="tier">1. Ouro</td><td>&gt; 500k</td><td>&gt; R$ 3.000</td><td>Média</td></tr>
+        <tr><td class="tier">2. Prata</td><td>100k a 500k</td><td>&gt; R$ 1.000</td><td>Média</td></tr>
+        <tr><td class="tier">3. Bronze</td><td>&lt; 100k</td><td>&lt; R$ 1.000</td><td>Baixa</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="font-size:17px;margin:22px 0 12px">Periodicidade por tier</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Rotina</th><th>Diamante</th><th>Ouro</th><th>Prata</th><th>Bronze</th></tr></thead>
+      <tbody>
+        <tr><td class="tier">Check do canal</td><td>Diário</td><td>Semanal</td><td>Quinzenal</td><td>Mensal / bimensal</td></tr>
+        <tr><td class="tier">Sugestões de pauta</td><td>Semanal</td><td>Semanal</td><td>Quinzenal / mensal</td><td>Bloco por nicho</td></tr>
+        <tr><td class="tier">Account Plan</td><td>Trimestral</td><td>Trimestral</td><td>Semestral</td><td>Anual</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="font-size:17px;margin:22px 0 12px">Prioridade e SLA de demandas (Jira)</h3>
+  <p style="color:var(--muted);font-size:14px;margin-bottom:12px">SLA por prioridade: <b class="pri-alta">alta</b> 1 a 2 dias, <b class="pri-media">média</b> 3 a 5 dias, <b class="pri-baixa">baixa</b> 5 a 7 dias.</p>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Demanda</th><th>Prioridade</th><th>Demanda</th><th>Prioridade</th></tr></thead>
+      <tbody>
+        <tr><td>Hackeamento</td><td class="pri-alta">Alta</td><td>Reivindicação de conteúdo</td><td class="pri-media">Média</td></tr>
+        <tr><td>Strikes</td><td class="pri-alta">Alta</td><td>Adsense</td><td class="pri-media">Média</td></tr>
+        <tr><td>Liberação de vídeo</td><td class="pri-alta">Alta</td><td>Associação de canal</td><td class="pri-media">Média</td></tr>
+        <tr><td>Ícones amarelos</td><td class="pri-alta">Alta</td><td>Aceitar adm de canal</td><td class="pri-media">Média</td></tr>
+        <tr><td>Ativação Content ID</td><td class="pri-alta">Alta</td><td>Whitelist</td><td class="pri-media">Média</td></tr>
+        <tr><td>Desassociação de canal</td><td class="pri-baixa">Baixa</td><td>Dúvida com plataformas</td><td class="pri-media">Média</td></tr>
+        <tr><td>Alteração de CMS</td><td class="pri-baixa">Baixa</td><td>Metadados (musical/vídeo)</td><td class="pri-baixa">Baixa</td></tr>
+        <tr><td>Acessos adm</td><td class="pri-baixa">Baixa</td><td>Relatórios</td><td class="pri-baixa">Baixa</td></tr>
+        <tr><td>Treinamentos</td><td class="pri-baixa">Baixa</td><td>Podcast</td><td class="pri-baixa">Baixa</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="font-size:17px;margin:22px 0 12px">Prazos duros</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Item</th><th>Prazo</th></tr></thead>
+      <tbody>
+        <tr><td>Recebimento de metadados</td><td>Mínimo 30 dias antes do lançamento</td></tr>
+        <tr><td>Lançamento internacional</td><td>Mínimo 40 dias</td></tr>
+        <tr><td>Podcast, primeira entrega</td><td>Mínimo 21 dias</td></tr>
+        <tr><td>Associações no CMS</td><td>Apenas de segunda a quarta</td></tr>
+        <tr><td>Troca de conta Adsense</td><td>Só a cada 32 dias</td></tr>
+        <tr><td>Roll up de música e vídeo</td><td>Depende do YouTube, sem prazo estimável</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- TEMPLATES -->
+<style>
+  .tpl-full{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:18px;overflow:hidden}
+  .tpl-hd{display:flex;align-items:center;gap:12px;padding:15px 20px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+  .tpl-hd .pill{background:var(--sky);color:#fff;font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;letter-spacing:.5px;text-transform:uppercase}
+  .tpl-hd h3{font-size:17px;font-weight:700}
+  .copy-btn{margin-left:auto;background:var(--navy);color:#fff;border:none;border-radius:8px;padding:8px 14px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:7px;transition:background .15s}
+  .copy-btn:hover{background:var(--purple)}
+  .copy-btn.ok{background:var(--lime);color:var(--navy)}
+  .tpl-full .tpl-body{padding:18px 20px}
+  .tpl-full pre{white-space:pre-wrap;font-family:"DM Sans",sans-serif;font-size:14px;color:var(--ink);background:var(--paper);padding:18px 20px;border-radius:10px;line-height:1.7;border:1px solid var(--line)}
+  .tpl-full .var{background:var(--lime);border-radius:3px;padding:0 3px;font-weight:700}
+  .tpl-full .ext{margin-top:12px;font-size:13.5px;color:var(--muted)}
+  .tpl-full .ext a{color:var(--vibrancy);font-weight:700;text-decoration:none}
+  @media print{.copy-btn{display:none}}
+</style>
+
+<section id="templates" class="wrap" style="padding-top:20px">
+  <div class="phase-head"><span class="badge b-orq">Modelos</span><h2>Mensagens e <span class="mark">templates</span></h2></div>
+  <p class="phase-meta">Textos completos das mensagens e emails padrão que o CS usa nos processos. Basta clicar em copiar, colar onde precisar e trocar os campos em destaque pelos dados do cliente.</p>
+
+  <div class="tpl-full" id="tpl-boasvindas">
+    <div class="tpl-hd"><span class="pill">Onboarding 1.1</span><h3>Mensagem padrão de boas-vindas</h3>
+      <button class="copy-btn" onclick="copyTpl('t-bv',this)"><span>Copiar</span></button></div>
+    <div class="tpl-body">
+      <pre id="t-bv">Bom dia, pessoal. Sejam muito bem-vindos!
+
+Meu nome é <span class="var">[NOME]</span> e sou a estrategista responsável pelo canal junto à One Big Media. Antes de mais nada, gostaria de agradecer por escolher a nossa empresa para trabalhar com vocês. Qualquer dúvida ou questão que precise tratar, você pode me mandar uma mensagem que eu vou coordenar junto às nossas equipes, tudo bem?
+
+Pessoal, para já iniciarmos os processos por aqui, precisamos de acesso ao canal com perfil de Administrador. Podem incluir os seguintes e-mails, por gentileza?
+creators@1bigmedia.group
+suporte.oficial@1bigmedia.group
+plataforma.dados@1bigmedia.group
+
+Além disso, gostaria de agendar nossa reunião de Kickoff para dia <span class="var">[DATA]</span> às <span class="var">[HORA]</span>. Vocês têm disponibilidade?</pre>
+    </div>
+  </div>
+
+  <div class="tpl-full" id="tpl-entrada">
+    <div class="tpl-hd"><span class="pill">Onboarding 1.2</span><h3>Email de entrada do cliente</h3>
+      <button class="copy-btn" onclick="copyTpl('t-en',this)"><span>Copiar</span></button></div>
+    <div class="tpl-body">
+      <pre id="t-en">Para: Financeiro (Henrique), Fiscal (Adriano, Marcos), Comercial (Renata), CS (Bela), Operação (Jeff, Geize), Dados (Paulo)
+
+Assunto: Entrada <span class="var">[NOME DO CANAL]</span>
+
+Olá, pessoal. Espero que estejam bem.
+Seguem informações sobre o novo cliente, a <span class="var">[NOME]</span>:
+
+- Canal associado no CMS <span class="var">[XXX]</span> (ou informar se está em análise ou não pôde ser associado)
+- Link do(s) canal(is): <span class="var">[...]</span>
+- Rótulo: <span class="var">[XXXX]</span> (email não pode ser enviado sem essa informação)
+- Valores previstos em contrato (mínimo, share, fee mensal)
+- CNPJ: <span class="var">[XXXXX]</span>
+- Enviar e-mail de NFs e relatórios financeiros para: <span class="var">[XXXXXX]</span>
+- Conta bancária: Banco / Agência / Conta Corrente
+
+A primeira competência será em <span class="var">[MÊS]</span> referente a <span class="var">[MÊS ANTERIOR]</span> e a planilha de entrada de cliente para controle financeiro já foi preenchida.
+Em anexo, contrato e BIP para consulta.
+
+Abraços,</pre>
+    </div>
+  </div>
+
+  <div class="tpl-full">
+    <div class="tpl-hd"><span class="pill">Onboarding 1.3</span><h3>Demandas de setup no Jira</h3>
+      <button class="copy-btn" onclick="copyTpl('t-jira',this)"><span>Copiar</span></button></div>
+    <div class="tpl-body">
+      <pre id="t-jira">Board: OPS. Anexar o doc de pedido de associação nas demandas indicadas.
+
+1. Criar rótulo <span class="var">[NOME DO CANAL]</span>
+   (criar antes do envio do email de entrada)
+
+2. Aceitar acesso de editor: <span class="var">[NOME DO CANAL]</span>
+
+3. Backup e Associação: <span class="var">[NOME DO CANAL]</span>
+   (anexar o doc de pedido de associação)
+
+4. Incluir no dash de reivindicações: <span class="var">[NOME DO CANAL]</span>
+
+Solicitar à Produção (chat CS mais Produção):
+- Incluir o cliente na planilha de demandas
+- Relatório de overview com cluster</pre>
+    </div>
+  </div>
+
+  <div class="tpl-full">
+    <div class="tpl-hd"><span class="pill">Ongoing 2.1</span><h3>Check do canal, passo a passo</h3>
+      <button class="copy-btn" onclick="copyTpl('t-check',this)"><span>Copiar</span></button></div>
+    <div class="tpl-body">
+      <pre id="t-check">1. Inserir informações do cliente, link do canal e grade semanal.
+
+2. Inserir dados da semana vigente e, na coluna "total", inserir os dados totais do canal a partir da semana 1 (o apurado do canal).
+
+3. Preencher a tabela "Média do canal" para acompanhamento do desempenho.
+
+4. Sempre acompanhar se as métricas estão dentro da média do mês anterior. Caso não esteja, propor soluções no campo de recomendações.
+
+5. Preencher anomalias (como strike e vídeo viral) no campo "Histórico de anomalias", com a data do ocorrido.
+
+6. Em pontos de atenção, preencher qualquer mudança que possa afetar as métricas do canal (por exemplo, "cliente não está seguindo a grade proposta").
+
+7. A contagem de semana é de segunda a domingo.</pre>
+    </div>
+  </div>
+
+  <div class="tpl-full">
+    <div class="tpl-hd"><span class="pill">Referência</span><h3>Acessos ADM solicitados na entrada</h3>
+      <button class="copy-btn" onclick="copyTpl('t-adm',this)"><span>Copiar</span></button></div>
+    <div class="tpl-body">
+      <pre id="t-adm">Solicitar ao cliente acesso ao canal com perfil de Administrador para os e-mails:
+
+creators@1bigmedia.group
+suporte.oficial@1bigmedia.group
+plataforma.dados@1bigmedia.group
+
+Configuração no YouTube Studio: studio.youtube.com > Configurações > Permissões > Convidar > digitar o e-mail > Acesso > função Administrador.</pre>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <b>One Big Media</b> · Playbook do CS / YouTube Specialist<br>
+    Documento operacional interno. Supporting creators.
+  </div>
+</footer>
+
+<script>
+  function copyTpl(id,btn){
+    var el=document.getElementById(id);
+    if(!el)return;
+    var text=el.innerText;
+    function done(){
+      var s=btn.querySelector('span');var old=s.textContent;
+      s.textContent='Copiado';btn.classList.add('ok');
+      setTimeout(function(){s.textContent=old;btn.classList.remove('ok');},1600);
+    }
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(done).catch(function(){fallback(text,done);});
+    }else{fallback(text,done);}
+  }
+  function fallback(text,cb){
+    var ta=document.createElement('textarea');ta.value=text;
+    ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);
+    ta.select();try{document.execCommand('copy');}catch(e){}
+    document.body.removeChild(ta);cb();
+  }
+  window.addEventListener('beforeprint',function(){
+    document.querySelectorAll('details').forEach(function(d){d.dataset._o=d.open?'1':'';d.open=true;});
+  });
+  window.addEventListener('afterprint',function(){
+    document.querySelectorAll('details').forEach(function(d){if(d.dataset._o!=='1')d.open=false;});
+  });
+</script>
+</body>
+</html>
